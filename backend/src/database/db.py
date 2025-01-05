@@ -3,10 +3,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from config import settings  # Load environment settings
+from src.database.dbsettings import Settings
+
+settings = Settings()
+
+
+#If want type validation, most likely have to instantiate within app and call back to here using a funciton that may raise issues.
 
 # SQLAlchemy setup
-SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL  # Define in .env file
+SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
+  # Define in .env file
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

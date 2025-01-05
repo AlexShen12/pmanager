@@ -3,6 +3,7 @@ from models import User
 from schemas import UserCreate, UserUpdate
 # from app.security import hash_password, verify_password  # Assume you have these functions
 
+# remember ot move to main out of SRC no need for SRC ATP idk even fucj
 # Create a new user
 def create_user(db: Session, user: UserCreate):
     hashed_password = user.password #Hopefully hashed later.

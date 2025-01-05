@@ -7,7 +7,6 @@ router: APIRouter = APIRouter()
 
 @router.post("/signup")
 def signup(inputs: LoginInfo, request: Request):
-    supabase: Base = request.app.
 
     response = .signup(email=inputs.email, password=inputs.password)
 

@@ -16,7 +16,7 @@ class UserResponse(UserBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # ???? Model validation makes no sense but tbf have to think about it.
