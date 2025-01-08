@@ -3,7 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from src.database.dbsettings import Settings
+from src.globals import Settings
 
 settings = Settings()
 
