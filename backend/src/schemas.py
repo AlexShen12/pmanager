@@ -16,8 +16,8 @@ class UserUpdate(BaseModel):
 class UserResponse(UserBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config: ConfigDict = ConfigDict(from_attributes= True)
+
 
 class CredentialBase(BaseModel): 
     platform: str
@@ -34,12 +34,12 @@ class CredentialUpdate(BaseModel):
 class Credential(CredentialBase):
     id: int
     owner_id: int
-    model_config:ConfigDict = ConfigDict(from_attributes= True)
+    model_config: ConfigDict = ConfigDict(from_attributes= True)
 
 class User(UserBase):
     id: int
     credentials: List[Credential] = []
-    model_config:ConfigDict = ConfigDict(from_attributes= True)
+    model_config: ConfigDict = ConfigDict(from_attributes= True)
 
 
         

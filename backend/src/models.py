@@ -11,7 +11,7 @@ class User(Base):
     #pwlist = Column(JSON) # Need to figure out how to validate before storing as well... Can do as dict since serialization is automatic
 
     # linkes to stored credentials
-    credentials = relationship("Credential", back_populates= "owner", cascade= "all, delete orphan")
+    credentials = relationship("Credential", back_populates= "owner", cascade= "all, delete-orphan")
 
 
 class Credential(Base):
@@ -20,7 +20,7 @@ class Credential(Base):
     id = Column(Integer, primary_key= True, index = True)
     website = Column(String, index = True)
     login = Column(String)
-    enc_pass = Column(String)
+    enc_pass = Column(String) 
 
     # To link back to user who owns this sheet. 
 

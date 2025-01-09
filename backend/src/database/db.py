@@ -3,10 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from src.globals import Settings
-
-settings = Settings()
-
+from src.globals.config import settings
 
 #If want type validation, most likely have to instantiate within app and call back to here using a funciton that may raise issues.
 

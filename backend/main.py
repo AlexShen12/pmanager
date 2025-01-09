@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from src.database.db import get_db
 # fix later 
-from src import crud, models, schemas
+from src import crud, models, schemas, utils
 
 # Create the FastAPI app
 app = FastAPI()
