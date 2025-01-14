@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from src.models import User, Credential
 from src.schemas import UserCreate, UserUpdate, CredentialCreate, CredentialUpdate
+# from utils import hash_password
 
 # from app.security import hash_password, verify_password  # Assume you have these functions
 
@@ -50,7 +51,7 @@ def delete_user(db: Session, user_id: int):
 
 #creates a new credential 
 def create_credential(db: Session, credential: CredentialCreate, user_id:int):
-    encrypted_pw = encrypt_pw() # need to encrypt!!
+    encrypted_pw = credential.password # need to encrypt!!
     db_credential = Credential(platform = credential.platform, login = credential.login, password = encrypted_pw)
     db.add(db_credential)
     db.commit()

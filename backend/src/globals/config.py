@@ -8,7 +8,5 @@ class Settings(BaseSettings):
     DATABASE_URL: str 
     FERNET_KEY: bytes
 
+
 settings = Settings()
-
-
-

@@ -18,10 +18,12 @@ def hash_password(password):
     hashed_password = bcrypt.hashpw(password=pwd_bytes, salt=salt)
     return hashed_password
 
+# Need to hash multiple times 
+
 # Check if the provided password matches the stored password (hashed)
 def verify_password(plain_password, hashed_password):
-    password_byte_enc = plain_password.encode('utf-8')
-    return bcrypt.checkpw(password = password_byte_enc , hashed_password = hashed_password)
+    byte = plain_password.encode('utf-8')
+    return bcrypt.checkpw(password = byte , hashed_password = hashed_password)
 
 def encrypt_password(password):
     return cipher_suite.encrypt(password.encode()).decode()
