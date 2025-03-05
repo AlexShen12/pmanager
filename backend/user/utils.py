@@ -1,15 +1,10 @@
 # utils.py
 import bcrypt
 from cryptography.fernet import Fernet
-from src.globals.config import settings  
-
-# Kinda a sketchy way of doing fernet idk 
-
+from core.config import settings  
 
 # Initialize cipher with key from settings
 cipher_suite = Fernet(settings.FERNET_KEY)
-
-# Context for password hashing
 
 # Hash a password using bcrypt
 def hash_password(password):

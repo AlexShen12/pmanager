@@ -1,4 +1,6 @@
+#external
 from sqlalchemy.orm import Session
+
 from src.models import User, Credential
 from src.schemas import UserCreate, UserUpdate, CredentialCreate, CredentialUpdate
 # from utils import hash_password
@@ -8,16 +10,16 @@ from src.schemas import UserCreate, UserUpdate, CredentialCreate, CredentialUpda
 # remember ot move to main out of SRC no need for SRC ATP idk even fucj
 # Create a new user
 def create_user(db: Session, user: UserCreate):
-    hashed_password = user.password #Hopefully hashed later.
-    db_user = User(username=user.username, email=user.email, password=hashed_password)
+    hashed_password = user.password
+    db_user = User(username = user.username, email = user.email, password = hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
 # Get a user by ID
-def get_user(db: Session, user_id: int):
-    return db.query(User).filter(User.id == user_id).first()
+def get_user_email(db: Session, user_email: int):
+    return db.query(User).filter(User.email == user_email).first()
 
 # Get all users Not sure when this would be useful but im all here for it. 
 def get_users(db: Session, skip: int = 0, limit: int = 10):
@@ -52,7 +54,7 @@ def delete_user(db: Session, user_id: int):
 #creates a new credential 
 def create_credential(db: Session, credential: CredentialCreate, user_id:int):
     encrypted_pw = credential.password # need to encrypt!!
-    db_credential = Credential(platform = credential.platform, login = credential.login, password = encrypted_pw)
+    db_credential = Credential(website = credential.platform, login = credential.login, password = encrypted_pw)
     db.add(db_credential)
     db.commit()
     db.refresh(db_credential)
