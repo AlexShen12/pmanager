@@ -8,12 +8,3 @@ class Settings(BaseSettings):
     FERNET_KEY: bytes
 
 settings = Settings()
-
-
-
-
-
-
-
-
-
