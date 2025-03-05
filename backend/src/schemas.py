@@ -1,45 +1,59 @@
-from pydantic import BaseModel, ConfigDict
-from typing import List
+from typing import Optional
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
+
 
 class UserBase(BaseModel):
-    username: str
-    email: str
+    email: EmailStr = Field(..., alias = 'user_email') # unecessary but nice to use/know 
+    username: str 
+    password: str 
+
+    model_config: ConfigDict = ConfigDict(
+        from_attributes= True, 
+        extra= "ignore"
+    )
 
 class UserCreate(UserBase):
-    password: str
-
-class UserUpdate(BaseModel):
-    username: str | None = None
-    email: str | None = None
-    password: str | None = None
+    pass
 
 class UserResponse(UserBase):
-    id: int
+    id: int 
+    credentails: list[CredentialResponse] = []
 
-    model_config: ConfigDict = ConfigDict(from_attributes= True)
+    model_config: ConfigDict = ConfigDict( 
+        from_attributes= True 
+    )
+
+class UserUpdate(UserBase):
+    email: Optional[EmailStr] = Field(None, alias = 'user_email')
+    username: Optional[str] = None
+    password: Optional[str] = None
 
 
-class CredentialBase(BaseModel): 
-    platform: str
-    login: str
+
+class CredentialBase(BaseModel):
+    website: str 
+    subusername: str
+    subpassword: str
+
+    model_config: ConfigDict = ConfigDict(
+        from_attributes= True, 
+        extra= "ignore"
+    )
 
 class CredentialCreate(CredentialBase):
-    password: str  
+    pass
 
-class CredentialUpdate(BaseModel):
-    platform: str | None = None
-    login: str | None = None
-    password: str | None = None
+class CredentialResponse(CredentialBase):
+    id: int 
+    user_id: int 
 
-class Credential(CredentialBase):
-    id: int
-    owner_id: int
-    model_config: ConfigDict = ConfigDict(from_attributes= True)
-
-class User(UserBase):
-    id: int
-    credentials: List[Credential] = []
-    model_config: ConfigDict = ConfigDict(from_attributes= True)
+    model_config: ConfigDict = ConfigDict( 
+        from_attributes= True 
+    )
 
 
-        
+class CredentialUpdate(CredentialBase):
+    website: Optional[str] = None
+    subusername: Optional[str] = None
+    subpassword: Optional[str] = None
+
