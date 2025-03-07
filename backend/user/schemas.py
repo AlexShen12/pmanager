@@ -6,7 +6,6 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field
 class CredentialBase(BaseModel):
     website: str 
     subusername: str
-    subpassword: str
 
     model_config: ConfigDict = ConfigDict(
         from_attributes= True, 
@@ -14,7 +13,7 @@ class CredentialBase(BaseModel):
     )
 
 class CredentialCreate(CredentialBase):
-    pass
+    subpassword: str
 
 class CredentialResponse(CredentialBase):
     id: int 
@@ -34,7 +33,7 @@ class CredentialUpdate(CredentialBase):
 class UserBase(BaseModel):
     email: EmailStr = Field(..., alias = 'user_email') # unecessary but nice to use/know 
     username: str 
-    password: str 
+    
 
     model_config: ConfigDict = ConfigDict(
         from_attributes= True, 
@@ -42,7 +41,7 @@ class UserBase(BaseModel):
     )
 
 class UserCreate(UserBase):
-    pass
+    password: str 
 
 class UserResponse(UserBase): 
     id: int 

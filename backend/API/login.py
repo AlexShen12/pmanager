@@ -2,10 +2,11 @@
 # external
 from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy.orm import Session
+from backend.user import schemas
 
 #internal
-from src.core.db import get_db
-from src import crud, schemas
+from backend.src.db import get_db
+from backend.user import crud
 
 login_router: APIRouter = APIRouter()
 

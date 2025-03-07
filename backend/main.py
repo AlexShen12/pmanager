@@ -8,8 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 #internal
-from src import models
-from src.core.db import engine
+from backend.user import models
+from backend.src.db import engine
 from src.API.login import login_router
 
 
