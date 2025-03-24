@@ -1,34 +1,23 @@
-#builtin 
+#built-in 
 from contextlib import asynccontextmanager
 
 #external 
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
-from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi import FastAPI
+# To implement corsmiddleware.
 
 #internal
-from backend.user import models
-from backend.src.db import engine
-from src.API.login import login_router
-
+from src.db import engine
+from user.models import Base
+from API.users import user_router
+from API.credentials import cred_router
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
-    models.Base.metadata.create_all(bind=engine)
+def lifespan(app: FastAPI):
+    Base.schema.metadata.create_all(bind = engine)
     yield 
     engine.dispose()
 
-app = FastAPI(lifespan=lifespan)
+app: FastAPI = FastAPI(lifespan = lifespan)
 
-origins = ["http://localhost:8080"]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],)
-
-app.include_router(router=login_router, prefix= "/users")
-
+app.include_router(user_router)
+app.include_router(cred_router)

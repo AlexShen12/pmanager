@@ -1,7 +1,7 @@
-# utils.py
+# to be implemented
 import bcrypt
 from cryptography.fernet import Fernet
-from core.config import settings  
+from src.config import settings  
 
 # Initialize cipher with key from settings
 cipher_suite = Fernet(settings.FERNET_KEY)

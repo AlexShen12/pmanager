@@ -4,6 +4,7 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field
 # Potentially use individual BaseModels instead of inheritance for safety?
 
 class CredentialBase(BaseModel):
+    id: int
     website: str 
     subusername: str
 
@@ -17,7 +18,7 @@ class CredentialCreate(CredentialBase):
 
 class CredentialResponse(CredentialBase):
     id: int 
-    user_id: int 
+    user_id: int #???? were you on meth???????
 
     model_config: ConfigDict = ConfigDict( 
         from_attributes= True 
@@ -31,9 +32,9 @@ class CredentialUpdate(CredentialBase):
 
 
 class UserBase(BaseModel):
+    id: int
     email: EmailStr = Field(..., alias = 'user_email') # unecessary but nice to use/know 
     username: str 
-    
 
     model_config: ConfigDict = ConfigDict(
         from_attributes= True, 
@@ -56,4 +57,13 @@ class UserUpdate(UserBase):
     username: Optional[str] = None
     password: Optional[str] = None
 
+class LoginSchema(BaseModel):
+    email: str
+    password: str
 
+    model_config: ConfigDict = ConfigDict(
+        from_attributes= True
+    )
+
+class DelResponse(BaseModel):
+    detail: str = "User deleted."

@@ -49,7 +49,7 @@ class Credential(Base):
     subusername: Mapped[str]
     subpassword: Mapped[str]
 
-    user_id = Mapped[int] = mapped_column(Integer, ForeignKey('User.id'))
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey('User.id'))
 
     user: Mapped[list["User"]] = relationship(
         "User",
