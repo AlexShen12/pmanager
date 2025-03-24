@@ -26,3 +26,5 @@ def encrypt_password(password):
 def decrypt_password(encrypted_password):
     return cipher_suite.decrypt(encrypted_password.encode()).decode()
 
+
+
